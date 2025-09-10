@@ -2,8 +2,9 @@
 .chat {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  padding: 2rem;
+  height: 100%;
+  min-height: 0; /* allow children to shrink inside flex containers */
+  padding: 1rem 1.25rem;
 }
 
 .chat h3 {
@@ -15,12 +16,12 @@
 
 .chat-list {
   flex: 1;
+  min-height: 0; /* critical for nested scrolling in flex parents */
   overflow-y: auto;
   margin-bottom: 1rem;
   padding: 1rem;
   background: #f8f9fa;
   border-radius: 8px;
-  max-height: calc(100vh - 200px);
 }
 
 .chat-item {
@@ -109,10 +110,7 @@
 /* Responsive adjustments for chat */
 @media (max-width: 1024px) {
   .chat {
-    height: 50vh;
-  }
-  
-  .chat-list {
-    max-height: calc(50vh - 150px);
+    height: 100%;
+    padding: 1rem;
   }
 }

@@ -60,17 +60,32 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 0; /* allow nested scrollers like .chat-list to size correctly */
 }
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .picture-page {
-    flex-direction: column;
+  flex-direction: column;
+  height: auto; /* allow page to grow */
+  min-height: calc(100vh - 60px); /* keep at least viewport height */
+  overflow: visible; /* needed for sticky child */
+  }
+  .pic-left {
+    min-height: 0;
   }
   
   .pic-right {
-    width: 100%;
-    max-height: 50vh;
+  width: 100%;
+  max-height: 30vh; /* smaller chat panel so the image stays fully visible */
+  min-height: 24vh;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  bottom: 0; /* stick chat to the bottom when stacked below image */
+  top: calc(100vh - 30vh); /* fallback for browsers that prefer top with sticky */
+  align-self: stretch;
+  background: #fff; /* ensure proper overlay on backgrounds */
+  z-index: 1;
   }
 }
 
